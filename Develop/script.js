@@ -2,10 +2,68 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 var today = dayjs();
-console.log(today);
+var nineAMEl = document.querySelector("#hour-9");
+var tenAMEl = document.querySelector("#hour-10");
+var elevenAMEl = document.querySelector("#hour-11");
+var twelvePMEl = document.querySelector("#hour-12");
+var onePMEl = document.querySelector("#hour-13");
+var twoPMEl = document.querySelector("#hour-14");
+var threePMEl = document.querySelector("#hour-15");
+var fourPMEl = document.querySelector("#hour-16");
+var fivePMEl = document.querySelector("#hour-17");
+var timeSlots = [
+  nineAMEl,
+  tenAMEl,
+  elevenAMEl,
+  twelvePMEl,
+  onePMEl,
+  twoPMEl,
+  threePMEl,
+  fourPMEl,
+  fivePMEl,
+]; //add 9 to the index position and compare that to current hour in military time.
+
+// console.log(typeof +today.format("HH"));
+// console.log(timeSlots.indexOf(1));
+// for (var i in timeSlots) {
+//   console.log(i);
+// }
+
+// for (i = 0; i < timeSlots.length; i++) {
+//   if (+i + 9 < +today.format("HH")) {
+//     console.log("past");
+//   } else if (+i + 9 == +today.format("HH")) {
+//     console.log("present");
+//   } else {
+//     console.log("future");
+//   }
+// }
+
 $(function () {
-  console.log(today);
   $("#currentDay").text(today.format("dddd MMMM DD, HH:00"));
+
+  // timeSlots.each(function () {
+  //   if (timeSlots.index() + 9 < +today.format("HH")) {
+  //     timeSlots.index().addClass("past");
+  //   } else if (timeSlots.index() + 9 == +today.format("HH")) {
+  //     timeSlots.index().addClass("present");
+  //   } else {
+  //     timeSlots.index().addClass("future");
+  //   }
+  // });
+
+  $(timeSlots).each(function () {
+    if ($(timeSlots).index(this) + 9 < +today.format("HH")) {
+      $(this).addClass("past");
+    } else if ($(timeSlots).index(this) + 9 == +today.format("HH")) {
+      console.log("present");
+      $(this).addClass("present");
+    } else {
+      console.log("future");
+      $(this).addClass("future");
+    }
+  });
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
