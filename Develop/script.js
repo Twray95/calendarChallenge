@@ -1,6 +1,3 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 var today = dayjs();
 var nineAMEl = document.querySelector("#hour-9");
 var tenAMEl = document.querySelector("#hour-10");
@@ -25,8 +22,10 @@ var timeSlots = [
 var timeSlotNotes = [];
 
 $(function () {
+  //Puts the date information in the header.
   $("#currentDay").text(today.format("dddd MMMM DD, h:00"));
 
+  //compares index of each div to current time to assign past, present, and future classes.
   $(timeSlots).each(function () {
     if ($(timeSlots).index(this) + 9 < +today.format("HH")) {
       $(this).addClass("past");
@@ -37,6 +36,7 @@ $(function () {
     }
   });
 
+  //adds event listener to all save buttons that saves the id of the textarea and the textarea val() to local storage.
   $(".saveBtn").on("click", function () {
     console.log($(this).siblings(".description").val());
     console.log($(this).siblings(".description").attr("id"));
@@ -45,15 +45,20 @@ $(function () {
       slotText: $(this).siblings(".description").val(),
     };
     timeSlotNotes.push(textNotes);
-    JSON.stringify(timeSlotNotes);
-    localStorage.setItem("timeSlotNotes", timeSlotNotes);
+    localStorage.setItem("notesLS", JSON.stringify(timeSlotNotes));
   });
 
   function displayNotes() {
-    console.log("test");
-    var notesForSlot = JSON.parse(localStorage.getItem("timeSlotNotes"));
-    $(notesForSlot).slotSelect.each(function () {
-      console.log($(this));
+    var notesForSlot = JSON.parse(localStorage.getItem("notesLS"));
+    console.log(JSON.parse(localStorage.getItem("notesLS")));
+    console.log(notesForSlot[0].slotSelect);
+
+    //How do you select each member of the array slotSelect to add slotText to relevant textarea.
+
+    $(notesForSlot).each(function () {
+      console.log(slotSelect);
+      var tempID = $(this).slotSelect;
+      $("#tempID").text($(this).slotText);
     });
   }
 
