@@ -6,7 +6,7 @@ This website allows the user to see the current time and color codes timeblocks 
 
 ## Screenshot
 
-[Screenshot of website deployment](/assets/images/Horiseon_Deployment.png)
+[Screenshot of website deployment](/Assets/calendar_deployment.png)
 
 ## Usage
 
@@ -14,7 +14,7 @@ The timeblocks auto color code to past (grey), present (red), and future (green)
 
 ## Link to Deployment
 
-[Horiseon Homepage](https://twray95.github.io/Horiseon-Homepage/)
+[Calendar Challenge](https://twray95.github.io/calendarChallenge/)
 
 ## Credits
 
