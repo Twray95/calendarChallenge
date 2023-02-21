@@ -21,48 +21,43 @@ var timeSlots = [
   threePMEl,
   fourPMEl,
   fivePMEl,
-]; //add 9 to the index position and compare that to current hour in military time.
-
-// console.log(typeof +today.format("HH"));
-// console.log(timeSlots.indexOf(1));
-// for (var i in timeSlots) {
-//   console.log(i);
-// }
-
-// for (i = 0; i < timeSlots.length; i++) {
-//   if (+i + 9 < +today.format("HH")) {
-//     console.log("past");
-//   } else if (+i + 9 == +today.format("HH")) {
-//     console.log("present");
-//   } else {
-//     console.log("future");
-//   }
-// }
+];
+var timeSlotNotes = [];
 
 $(function () {
-  $("#currentDay").text(today.format("dddd MMMM DD, HH:00"));
-
-  // timeSlots.each(function () {
-  //   if (timeSlots.index() + 9 < +today.format("HH")) {
-  //     timeSlots.index().addClass("past");
-  //   } else if (timeSlots.index() + 9 == +today.format("HH")) {
-  //     timeSlots.index().addClass("present");
-  //   } else {
-  //     timeSlots.index().addClass("future");
-  //   }
-  // });
+  $("#currentDay").text(today.format("dddd MMMM DD, h:00"));
 
   $(timeSlots).each(function () {
     if ($(timeSlots).index(this) + 9 < +today.format("HH")) {
       $(this).addClass("past");
     } else if ($(timeSlots).index(this) + 9 == +today.format("HH")) {
-      console.log("present");
       $(this).addClass("present");
     } else {
-      console.log("future");
       $(this).addClass("future");
     }
   });
+
+  $(".saveBtn").on("click", function () {
+    console.log($(this).siblings(".description").val());
+    console.log($(this).siblings(".description").attr("id"));
+    var textNotes = {
+      slotSelect: $(this).siblings(".description").attr("id"),
+      slotText: $(this).siblings(".description").val(),
+    };
+    timeSlotNotes.push(textNotes);
+    JSON.stringify(timeSlotNotes);
+    localStorage.setItem("timeSlotNotes", timeSlotNotes);
+  });
+
+  function displayNotes() {
+    console.log("test");
+    var notesForSlot = JSON.parse(localStorage.getItem("timeSlotNotes"));
+    $(notesForSlot).slotSelect.each(function () {
+      console.log($(this));
+    });
+  }
+
+  displayNotes();
 
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
