@@ -51,7 +51,6 @@ $(function () {
 
   //displays the text from most recent saves to local storage into the relevant text boxes.
   $(displayNotes).each(function () {
-    console.log("#" + this.slotSelect);
     $("#" + this.slotSelect).text(this.slotText);
   });
 });
